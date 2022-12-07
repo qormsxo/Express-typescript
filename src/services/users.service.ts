@@ -1,22 +1,22 @@
 import { hash } from 'bcrypt';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateUserDto } from '@dtos/users.dto';
-import { UserEntity } from '@entities/users.entity';
+import { Users } from '@entities/Users';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
 
 @EntityRepository()
-class UserService extends Repository<UserEntity> {
+class UserService extends Repository<Users> {
   public async findAllUser(): Promise<User[]> {
-    const users: User[] = await UserEntity.find();
+    const users: User[] = await Users.find();
     return users;
   }
 
   public async findUserById(userId: number): Promise<User> {
     if (isEmpty(userId)) throw new HttpException(400, 'UserId is empty');
 
-    const findUser: User = await UserEntity.findOne({ where: { id: userId } });
+    const findUser: User = await Users.findOne({ where: { id: userId } });
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     return findUser;

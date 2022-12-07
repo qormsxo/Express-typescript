@@ -18,9 +18,9 @@ class AuthController {
     }
   };
 
-  public renderSignUp = (req: Request, res: Response, next: NextFunction) => {
+  public joinView(req: Request, res: Response) {
     res.render('join', { title: '회원가입 - NodeBird' });
-  };
+  }
 
   // public logIn = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   //   try {

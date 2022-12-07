@@ -1,10 +1,10 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Posthashtag } from './Posthashtag';
 import { Users } from './Users';
 
 @Index('UserId', ['userId'], {})
 @Entity('posts', { schema: 'nodejs' })
-export class Posts {
+export class Posts extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 

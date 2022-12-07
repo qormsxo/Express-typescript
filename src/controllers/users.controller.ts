@@ -16,6 +16,10 @@ class UsersController {
     }
   };
 
+  public profileView(req: Request, res: Response) {
+    res.render('profile', { title: '내 정보 - NodeBird' });
+  }
+
   public getUserById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const userId = Number(req.params.id);
