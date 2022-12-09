@@ -17,7 +17,7 @@ import { logger, stream } from '@utils/logger';
 import session from 'express-session';
 import nunjucks from 'nunjucks';
 import path from 'path';
-
+import passport from 'passport';
 class App {
   public app: express.Application;
   public env: string;
@@ -78,6 +78,8 @@ class App {
         },
       }),
     );
+    // this.app.use(passport.initialize());
+    // this.app.use(passport.session());
     process.on('uncaughtException', err => {
       logger.error('There was an uncaught exception: ', err);
     });

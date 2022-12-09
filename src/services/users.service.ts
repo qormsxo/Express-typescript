@@ -1,6 +1,4 @@
-import { hash } from 'bcrypt';
 import { EntityRepository, Repository } from 'typeorm';
-import { CreateUserDto } from '@dtos/users.dto';
 import { Users } from '@entities/Users';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
