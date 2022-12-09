@@ -16,14 +16,14 @@ export class Follow {
   @Column('int', { primary: true, name: 'followerId' })
   followerId: number;
 
-  @ManyToOne(() => Users, users => users.follows, {
+  @ManyToOne(() => Users, users => users.Followers, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'followingId', referencedColumnName: 'id' }])
   following: Users;
 
-  @ManyToOne(() => Users, users => users.follows2, {
+  @ManyToOne(() => Users, users => users.Followings, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })

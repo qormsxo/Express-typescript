@@ -10,7 +10,6 @@ import { isEmpty } from '@utils/util';
 class IndexService extends Repository<Posts> {
   public async getAllPost(): Promise<Posts[]> {
     const posts: Posts[] = await Posts.find({ relations: ['user'] });
-    console.log(posts);
     return posts;
   }
 }
