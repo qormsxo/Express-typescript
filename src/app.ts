@@ -18,6 +18,7 @@ import session from 'express-session';
 import nunjucks from 'nunjucks';
 import path from 'path';
 import passport from 'passport';
+import PassportConfig from '@/passportConfig';
 class App {
   public app: express.Application;
   public env: string;
@@ -53,6 +54,7 @@ class App {
   }
 
   private initializeMiddlewares() {
+    PassportConfig();
     this.app.set('view engine', 'html');
     nunjucks.configure('views', {
       express: this.app,
@@ -78,8 +80,8 @@ class App {
         },
       }),
     );
-    // this.app.use(passport.initialize());
-    // this.app.use(passport.session());
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
     process.on('uncaughtException', err => {
       logger.error('There was an uncaught exception: ', err);
     });

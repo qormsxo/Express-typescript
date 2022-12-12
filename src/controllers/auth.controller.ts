@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import { CreateUserDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import AuthService from '@services/auth.service';
+import passport from 'passport';
+import { RequestWithUser } from '@/interfaces/auth.interface';
 
 class AuthController {
   public authService = new AuthService();
@@ -21,21 +23,34 @@ class AuthController {
     res.render('join', { title: '회원가입 - NodeBird' });
   }
 
-  // public logIn = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  //   try {
-  //     const userData: CreateUserDto = req.body;
-  //     const { cookie, findUser } = await this.authService.login(userData);
+  public logIn = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    passport.authenticate('local', (error: Error, user, info) => {
+      if (error) {
+        console.error(error);
+        return next(error);
+      }
+      if (!user) {
+        console.log(info.message);
+        return res.redirect(`/?loginError=${info.message}`);
+      }
+      return req.login(user, loginError => {
+        if (loginError) {
+          console.error(loginError);
+          return next(loginError);
+        }
+        return res.redirect('/');
+      });
+    })(req, res, next);
+  };
 
-  //     res.setHeader('Set-Cookie', [cookie]);
-  //     res.status(200).json({ data: findUser, message: 'login' });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
-
-  public logOut = async (req: Request, res: Response) => {
-    req.session = null;
-    res.redirect('/');
+  public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    console.log(req);
+    req.logOut(err => {
+      if (err) return next(err);
+      req.session.destroy(() => {
+        res.redirect('/');
+      });
+    });
   };
 }
 
