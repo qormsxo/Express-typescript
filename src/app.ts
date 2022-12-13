@@ -69,6 +69,11 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     // this.app.use(cookieParser(COOKIE_SECRET));
+    this.app.use(function (req, res, next) {
+      res.setHeader('Content-Security-Policy', "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
+      next();
+    });
+    this.app.use('/img', express.static(path.join(__dirname, '../uploads')));
     this.app.use(
       session({
         resave: false,

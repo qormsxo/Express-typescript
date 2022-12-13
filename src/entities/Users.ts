@@ -30,10 +30,10 @@ export class Users extends BaseEntity implements User {
   @Column('varchar', { name: 'snsId', nullable: true, length: 30 })
   snsId: string | null;
 
-  @Column('datetime', { name: 'createdAt' })
+  @Column('datetime', { name: 'createdAt', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @Column('datetime', { name: 'updatedAt' })
+  @Column('datetime', { name: 'updatedAt', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
   @Column('datetime', { name: 'deletedAt', nullable: true })

@@ -14,10 +14,10 @@ export class Posts extends BaseEntity {
   @Column('varchar', { name: 'img', nullable: true, length: 200 })
   img: string | null;
 
-  @Column('datetime', { name: 'createdAt' })
+  @Column('datetime', { name: 'createdAt', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @Column('datetime', { name: 'updatedAt' })
+  @Column('datetime', { name: 'updatedAt', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
   @Column('int', { name: 'UserId', nullable: true })
