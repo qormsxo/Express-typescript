@@ -5,6 +5,7 @@
     <div class="followings half">
         <h2>팔로잉 목록</h2>
         {% if user.Followings %}
+
         {% for following in user.Followings %}
         <div class="followNick" data-value={{followerIdList[loop.index-1]}}>{{following.nick}}</div>
         <!-- <button class="twit-notfollow">팔로잉끊기</button> -->
@@ -14,6 +15,7 @@
     <div class="followers half">
         <h2>팔로워 목록</h2>
         {% if user.Followers %}
+
         {% for follower in user.Followers %}
         <div>{{follower.nick}}</div>
         {% endfor %}

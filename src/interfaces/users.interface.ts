@@ -10,6 +10,6 @@ export interface User {
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
-  Followers: Follow[];
-  Followings: Follow[];
+  Followers: User[];
+  Followings: User[];
 }

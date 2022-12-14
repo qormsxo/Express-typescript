@@ -1,4 +1,4 @@
-import { EntityRepository, Repository, Connection, getConnection } from 'typeorm';
+import { EntityRepository, Repository, getConnection } from 'typeorm';
 import { Posts } from '@entities/Posts';
 import { postCreateDto } from '../dtos/post.dto';
 import { Hashtags } from '@/entities/Hashtags';

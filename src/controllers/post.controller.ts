@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import PostService from '@/services/post.service';
 import { RequestWithUser } from '@/interfaces/auth.interface';
 import { postCreateDto } from '../dtos/post.dto';
-import { Posts } from '../entities/Posts';
-
 class PostController {
   public postService = new PostService();
 

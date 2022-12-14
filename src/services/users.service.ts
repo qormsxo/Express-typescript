@@ -3,6 +3,7 @@ import { Users } from '@entities/Users';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
+import { Follow } from '../entities/Follow';
 
 @EntityRepository()
 class UserService extends Repository<Users> {
@@ -18,6 +19,10 @@ class UserService extends Repository<Users> {
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     return findUser;
+  }
+
+  public async following(userId: number, followingUserId: number): Promise<void> {
+    Follow.create({ followerId: userId, followingId: followingUserId }).save();
   }
 
   // public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {

@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { User } from '@interfaces/users.interface';
 import userService from '@services/users.service';
+import { RequestWithUser } from '@interfaces/auth.interface';
 
 class UsersController {
   public userService = new userService();
@@ -26,6 +27,16 @@ class UsersController {
 
       res.status(200).json({ data: findOneUserData, message: 'findOne' });
     } catch (error) {
+      next(error);
+    }
+  };
+
+  public addFollowing = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      await this.userService.following(req.user.id, parseInt(req.params.id));
+      res.send('success');
+    } catch (error) {
+      console.log(error);
       next(error);
     }
   };

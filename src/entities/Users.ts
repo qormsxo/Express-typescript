@@ -40,10 +40,10 @@ export class Users extends BaseEntity implements User {
   deletedAt: Date | null;
 
   @OneToMany(() => Follow, follow => follow.following)
-  Followers: Follow[];
+  Followers: User[];
 
   @OneToMany(() => Follow, follow => follow.follower)
-  Followings: Follow[];
+  Followings: User[];
 
   @OneToMany(() => Posts, posts => posts.user)
   posts: Posts[];

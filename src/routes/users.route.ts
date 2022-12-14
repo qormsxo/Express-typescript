@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
 
 class UsersRoute implements Routes {
-  public path = '/users';
+  public path = '/user';
   public router = Router();
   public usersController = new UsersController();
 
@@ -14,7 +14,8 @@ class UsersRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.usersController.getUsers);
+    this.router.post(`${this.path}/:id/follow`, this.usersController.addFollowing);
+    this.router.get(`${this.path}/profile`, this.usersController.profileView);
     this.router.get(`${this.path}/:id(\\d+)`, this.usersController.getUserById);
     // this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateUserDto, 'body', true), this.usersController.updateUser);
     // this.router.delete(`${this.path}/:id(\\d+)`, this.usersController.deleteUser);

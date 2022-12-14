@@ -16,7 +16,8 @@ class IndexController {
     res.locals.user = req.user;
     res.locals.followerCount = req.user ? req.user.Followers.length : 0;
     res.locals.followingCount = req.user ? req.user.Followings.length : 0;
-    res.locals.followerIdList = req.user ? req.user.Followings.map(f => f.followerId) : [];
+    res.locals.followerIdList = req.user ? req.user.Followings.map(f => f.id) : [];
+    console.log(req.user ? req.user : '');
     next();
   }
 }
