@@ -28,8 +28,8 @@ class App {
     this.app = express();
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
-
     this.env !== 'test' && this.connectToDatabase();
+
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeSwagger();

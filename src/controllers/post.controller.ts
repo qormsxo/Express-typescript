@@ -9,11 +9,10 @@ class PostController {
 
   public upload = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
     try {
-      console.log(req.user);
       const post: postCreateDto = req.body; // post 데이터 매핑
       post.userId = req.user.id;
 
-      this.postService.postCreate(post);
+      await this.postService.postCreate(post);
 
       res.redirect('/');
     } catch (error) {

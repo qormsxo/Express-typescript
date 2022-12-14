@@ -1,10 +1,10 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne, BaseEntity } from 'typeorm';
 import { Posts } from './Posts';
 import { Hashtags } from './Hashtags';
 
 @Index('HashtagId', ['hashtagId'], {})
 @Entity('posthashtag', { schema: 'nodejs' })
-export class Posthashtag {
+export class Posthashtag extends BaseEntity {
   @Column('datetime', { name: 'createdAt' })
   createdAt: Date;
 
