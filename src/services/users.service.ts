@@ -21,22 +21,19 @@ class UserService extends Repository<Users> {
     return findUser;
   }
 
-  public async following(userId: number, followingUserId: number): Promise<void> {
-    Follow.create({ followerId: userId, followingId: followingUserId }).save();
+  public async following(userId: number, followerId: number): Promise<void> {
+    // followerId : (팔로우 당하는 사람 기준) 팔로우를 건 사람.
+    // followingId : (팔로우 한사람 기준) 팔로우 건 상대 (현재 로그인한 유저)
+    Follow.create({ followerId: userId, followingId: followerId }).save();
   }
 
-  // public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {
-  //   if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
+  public async deleteFollowing(userId: number, followingUserId: number): Promise<void> {
+    Follow.delete({ followerId: userId, followingId: followingUserId });
+  }
 
-  //   const findUser: User = await UserEntity.findOne({ where: { id: userId } });
-  //   if (!findUser) throw new HttpException(409, "User doesn't exist");
-
-  //   const hashedPassword = await hash(userData.password, 10);
-  //   await UserEntity.update(userId, { ...userData, password: hashedPassword });
-
-  //   const updateUser: User = await UserEntity.findOne({ where: { id: userId } });
-  //   return updateUser;
-  // }
+  public async updateUser(userId: number, newNick: string): Promise<void> {
+    Users.update({ id: userId }, { nick: newNick });
+  }
 
   // public async deleteUser(userId: number): Promise<User> {
   //   if (isEmpty(userId)) throw new HttpException(400, 'UserId is empty');

@@ -41,17 +41,28 @@ class UsersController {
     }
   };
 
-  // public updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  //   try {
-  //     const userId = Number(req.params.id);
-  //     const userData: CreateUserDto = req.body;
-  //     const updateUserData: User = await this.userService.updateUser(userId, userData);
+  public deleteFollowing = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      console.log(req.params.id);
+      await this.userService.deleteFollowing(req.user.id, parseInt(req.params.id));
+      res.send('success');
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
 
-  //     res.status(200).json({ data: updateUserData, message: 'updated' });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+  public updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const userId = Number(req.params.id);
+      const { newNick } = req.body;
+      await this.userService.updateUser(userId, newNick);
+
+      res.status(200).json({ message: 'updated' });
+    } catch (error) {
+      next(error);
+    }
+  };
 
   // public deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   //   try {

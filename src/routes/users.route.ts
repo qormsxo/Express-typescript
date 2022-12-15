@@ -14,9 +14,11 @@ class UsersRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}/:id/follow`, this.usersController.addFollowing);
     this.router.get(`${this.path}/profile`, this.usersController.profileView);
-    this.router.get(`${this.path}/:id(\\d+)`, this.usersController.getUserById);
+    this.router.post(`${this.path}/:id/follow`, this.usersController.addFollowing);
+    this.router.delete(`${this.path}/:id/follow`, this.usersController.deleteFollowing);
+
+    this.router.patch(`${this.path}`, this.usersController.updateUser);
     // this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateUserDto, 'body', true), this.usersController.updateUser);
     // this.router.delete(`${this.path}/:id(\\d+)`, this.usersController.deleteUser);
   }
