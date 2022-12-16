@@ -2,9 +2,8 @@ import passport from 'passport';
 import local from '@/passportConfig/localStrategy';
 import { Users } from '../entities/Users';
 import { Follow } from '../entities/Follow';
+import kakao from './kakaoStrategy';
 export default () => {
-  local();
-
   passport.serializeUser((user: Users, done) => {
     done(null, user.id);
   });
@@ -35,4 +34,7 @@ export default () => {
       })
       .catch(err => done(err));
   });
+
+  local();
+  kakao();
 };

@@ -43,6 +43,19 @@ class AuthController {
     })(req, res, next);
   }
 
+  public kakaoLogin(req: Request, res: Response, next: NextFunction) {
+    passport.authenticate('kakao');
+  }
+
+  public kakaoCallback(req: Request, res: Response, next: NextFunction) {
+    passport.authenticate('kakao', {
+      failureRedirect: '/',
+    }),
+      (req: Request, res: Response) => {
+        res.redirect('/');
+      };
+  }
+
   public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     req.logOut(err => {
       if (err) return next(err);
