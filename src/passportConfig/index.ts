@@ -17,7 +17,6 @@ export default () => {
       .where('follow.followingId= :id', { id })
       // .andWhere('follower.id = follow.followingId')
       .getMany();
-    console.log('follower : ', follower);
 
     const following = await Users.createQueryBuilder('following') // 로그인한 유저 기준 내가 팔로우한 사람
       .innerJoin(Follow, 'follow', 'following.id = follow.followingId ')
@@ -25,7 +24,6 @@ export default () => {
       .where('follow.followerId= :id', { id })
       // .andWhere('following.id = follow.followerId')
       .getMany();
-    console.log('following : ', following);
 
     Users.createQueryBuilder('users')
       .where('users.id= :id', { id })

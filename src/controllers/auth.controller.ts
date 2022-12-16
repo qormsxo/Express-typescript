@@ -44,7 +44,6 @@ class AuthController {
   };
 
   public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
-    console.log(req);
     req.logOut(err => {
       if (err) return next(err);
       req.session.destroy(() => {

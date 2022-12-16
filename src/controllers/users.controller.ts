@@ -52,9 +52,9 @@ class UsersController {
     }
   };
 
-  public updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public updateUser = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const userId = Number(req.params.id);
+      const userId = req.user.id;
       const { newNick } = req.body;
       await this.userService.updateUser(userId, newNick);
 
