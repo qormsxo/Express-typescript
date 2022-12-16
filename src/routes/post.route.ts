@@ -4,6 +4,7 @@ import { Routes } from '@interfaces/routes.interface';
 import fs from 'fs';
 import multer from 'multer';
 import multerConfig from '../middlewares/multer.middleware';
+import { isLoggedIn } from '../middlewares/login.middleware';
 
 class PostRoute implements Routes {
   public path = '/post';
@@ -25,8 +26,8 @@ class PostRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}/img`, this.upload.single('img'), this.postController.file);
-    this.router.post(`${this.path}`, this.upload2.none(), this.postController.upload);
+    this.router.post(`${this.path}/img`, isLoggedIn, this.upload.single('img'), this.postController.file);
+    this.router.post(`${this.path}`, isLoggedIn, this.upload2.none(), this.postController.upload);
   }
 }
 

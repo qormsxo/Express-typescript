@@ -23,7 +23,7 @@ class AuthController {
     res.render('join', { title: '회원가입 - NodeBird' });
   }
 
-  public logIn = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public logIn(req: Request, res: Response, next: NextFunction) {
     passport.authenticate('local', (error: Error, user, info) => {
       if (error) {
         console.error(error);
@@ -41,7 +41,7 @@ class AuthController {
         return res.redirect('/');
       });
     })(req, res, next);
-  };
+  }
 
   public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     req.logOut(err => {

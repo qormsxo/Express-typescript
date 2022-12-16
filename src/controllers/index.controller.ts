@@ -6,7 +6,6 @@ class IndexController {
   private indexService = new IndexService();
   public mainView = async (req: Request, res: Response) => {
     const twits = await this.indexService.getAllPost();
-    console.log(twits);
     res.render('main', {
       title: 'NodeBird',
       twits,
@@ -17,7 +16,6 @@ class IndexController {
     res.locals.followerCount = req.user ? req.user.Followers.length : 0;
     res.locals.followingCount = req.user ? req.user.Followings.length : 0;
     res.locals.followerIdList = req.user ? req.user.Followings.map(f => f.id) : [];
-    console.log(req.user ? req.user : '');
     next();
   }
 }
