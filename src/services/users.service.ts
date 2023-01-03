@@ -1,8 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Users } from '@entities/Users';
-import { HttpException } from '@exceptions/HttpException';
-import { User } from '@interfaces/users.interface';
-import { isEmpty } from '@utils/util';
 import { Follow } from '../entities/Follow';
 
 @EntityRepository()

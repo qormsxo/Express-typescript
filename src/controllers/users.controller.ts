@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { User } from '@interfaces/users.interface';
 import userService from '@services/users.service';
 import { RequestWithUser } from '@interfaces/auth.interface';
 

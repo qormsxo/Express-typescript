@@ -1,11 +1,8 @@
-import { compare, hash } from 'bcrypt';
-import { sign } from 'jsonwebtoken';
+import { hash } from 'bcrypt';
 import { EntityRepository, Repository } from 'typeorm';
-import { SECRET_KEY } from '@config';
 import { CreateUserDto } from '@dtos/users.dto';
 import { Users } from '@entities/Users';
 import { HttpException } from '@exceptions/HttpException';
-import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
 import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
 
